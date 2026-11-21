@@ -1,0 +1,35 @@
+# Each seed is normally a DOI. A paper with no DOI in OpenAlex (this happens for
+# some older NeurIPS/AAAI papers) is given instead as "openalex:<work id>",
+# using the ID from https://openalex.org/<work id>.
+fields:
+  graph-ml:
+    - 10.48550/arxiv.1609.02907   # Semi-Supervised Classification with Graph Convolutional Networks (GCN)
+    - 10.48550/arxiv.1706.02216   # Inductive Representation Learning on Large Graphs (GraphSAGE)
+    - 10.17863/cam.48429          # Graph Attention Networks (GAT)
+    - 10.1007/978-3-319-93417-4_38  # Modeling Relational Data with Graph Convolutional Networks (R-GCN)
+    - 10.48550/arxiv.1611.07308   # Variational Graph Auto-Encoders
+    - 10.1145/2939672.2939754    # node2vec: Scalable Feature Learning for Networks
+    - 10.1145/2623330.2623732    # DeepWalk: Online Learning of Social Representations
+    - 10.1145/2736277.2741093    # LINE: Large-scale Information Network Embedding
+    - openalex:W2127795553       # Translating Embeddings for Modeling Multi-relational Data (TransE) -- no DOI in OpenAlex
+    - 10.1609/aaai.v28i1.8870    # Knowledge Graph Embedding by Translating on Hyperplanes (TransH)
+    - 10.1609/aaai.v29i1.9491    # Learning Entity and Relation Embeddings for KG Completion (TransR)
+    - 10.48550/arxiv.1412.6575   # Embedding Entities and Relations for Learning and Inference in KBs (DistMult)
+    - 10.48550/arxiv.1606.06357  # Complex Embeddings for Simple Link Prediction (ComplEx)
+    - 10.48550/arxiv.1902.10197  # RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space
+    - 10.1609/aaai.v32i1.11573   # Convolutional 2D Knowledge Graph Embeddings (ConvE)
+    - 10.1145/3447772            # Knowledge Graphs (survey, Hogan et al.)
+    - 10.48550/arxiv.1704.01212  # Neural Message Passing for Quantum Chemistry (MPNN)
+    - 10.1016/j.aiopen.2021.01.001  # Graph Neural Networks: A Review of Methods and Applications
+    - 10.1109/tnnls.2020.2978386    # A Comprehensive Survey on Graph Neural Networks
+    - 10.1145/3219819.3219890    # Graph CNNs for Web-Scale Recommender Systems (PinSage)
+    - 10.48550/arxiv.1902.07153  # Simplifying Graph Convolutional Networks (SGC)
+    - 10.17863/cam.40744          # Deep Graph Infomax
+    - 10.1145/3308558.3313562    # Heterogeneous Graph Attention Network
+    - 10.1145/3292500.3330989    # KGAT: Knowledge Graph Attention Network for Recommendation
+    - 10.48550/arxiv.2005.11401  # Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (RAG)
+    - 10.48550/arxiv.2404.16130  # From Local to Global: A Graph RAG Approach to Query-Focused Summarization
+    - 10.1109/tkde.2024.3352100  # Unifying Large Language Models and Knowledge Graphs: A Roadmap
+    - 10.48550/arxiv.2307.07697  # Think-on-Graph: Deep and Responsible Reasoning of LLM on Knowledge Graph
+    - 10.52202/079017-4224       # G-Retriever: RAG for Textual Graph Understanding and QA
+    - 10.1145/3777378            # Graph Retrieval-Augmented Generation: A Survey
