@@ -4,7 +4,7 @@ Find related research papers and see exactly why they're related, from a real ci
 
 ![Paper view, with related papers and the citation graph](docs/images/paper-view.png)
 
-Demo video: <link>
+Demo video: https://youtu.be/cMMUl2DJChs
 
 ## Use case
 
