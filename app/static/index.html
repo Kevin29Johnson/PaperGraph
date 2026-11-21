@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PaperGraph</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="#" class="app-name" id="home-link">PaperGraph</a>
+      <span class="tagline">Find related papers and see why they're related</span>
+    </div>
+    <div class="topbar-right">
+      <span class="stats" id="header-stats" aria-live="polite">loading…</span>
+      <span class="badge">Runs offline on Relate</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel panel-search" aria-label="Search">
+      <div class="search-box">
+        <label for="search-input" class="sr-only">Search papers by title</label>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search papers… ( / )"
+          autocomplete="off"
+          aria-describedby="search-help"
+        />
+        <button class="search-clear" id="search-clear-button" type="button" aria-label="Clear search" hidden>×</button>
+        <div id="search-help" class="sr-only">Type to search, use arrow keys to move through results, Enter to open, Escape to clear</div>
+      </div>
+      <ul id="search-results" class="search-results" role="listbox"></ul>
+
+      <div class="presets">
+        <div class="presets-label">Good starting points</div>
+        <div class="preset-chips" id="preset-chips"></div>
+      </div>
+
+      <button id="path-tool-button" class="path-tool-button" type="button">Find citation path</button>
+    </section>
+
+    <section class="panel panel-paper" aria-label="Paper details" id="paper-panel">
+      <div class="empty-state how-it-works" id="paper-empty">
+        <h2>How it works</h2>
+        <p>PaperGraph ranks related papers using three clues you can inspect:</p>
+        <ul>
+          <li><strong>Shared references</strong> &mdash; two papers that cite the same earlier work</li>
+          <li><strong>Co-citation</strong> &mdash; two papers that a later paper cites together</li>
+          <li><strong>Topic similarity</strong> &mdash; how close their titles and topics are in meaning</li>
+        </ul>
+        <button class="preset-chip" id="try-gat-button" type="button">Try: Graph Attention Networks</button>
+      </div>
+      <div id="paper-content" class="paper-content" hidden>
+        <div class="paper-header">
+          <h1 id="paper-title"></h1>
+          <div class="paper-meta" id="paper-meta"></div>
+          <div class="paper-authors" id="paper-authors"></div>
+          <div class="paper-topics" id="paper-topics"></div>
+          <div class="paper-links" id="paper-links"></div>
+          <div class="paper-citations" id="paper-citations"></div>
+        </div>
+        <div class="graph-wrap">
+          <div id="cy" role="img" aria-label="Graph of this paper and its related papers"></div>
+          <div class="graph-legend" id="graph-legend"></div>
+          <div class="graph-tooltip" id="graph-tooltip" hidden></div>
+          <div class="graph-controls">
+            <button class="reset-view-button" id="reset-view-button" type="button">Reset view</button>
+            <label class="graph-toggle">
+              <input type="checkbox" id="show-citations-toggle" checked />
+              Show citations
+            </label>
+          </div>
+        </div>
+        <button class="drawer-toggle" id="drawer-toggle" type="button" aria-expanded="false">How this was found</button>
+        <div class="drawer" id="drawer" hidden>
+          <pre id="drawer-content"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel-related" aria-label="Related papers" id="related-panel">
+      <h2 class="panel-heading">Related papers</h2>
+      <ul id="related-list" class="related-list">
+        <li class="empty-state" id="related-empty">Pick a paper to see related papers.</li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="path-panel" id="path-panel" hidden>
+    <div class="path-panel-inner">
+      <button class="path-close" id="path-close" type="button" aria-label="Close">×</button>
+      <h2>Find citation path</h2>
+      <div class="path-pickers">
+        <div>
+          <label for="path-from">From</label>
+          <div class="search-box">
+            <input id="path-from" type="text" placeholder="Search a paper…" autocomplete="off" />
+            <button class="search-clear" id="path-from-clear" type="button" aria-label="Clear" hidden>×</button>
+          </div>
+          <ul class="search-results" id="path-from-results" role="listbox"></ul>
+        </div>
+        <div>
+          <label for="path-to">To</label>
+          <div class="search-box">
+            <input id="path-to" type="text" placeholder="Search a paper…" autocomplete="off" />
+            <button class="search-clear" id="path-to-clear" type="button" aria-label="Clear" hidden>×</button>
+          </div>
+          <ul class="search-results" id="path-to-results" role="listbox"></ul>
+        </div>
+      </div>
+      <div class="path-chain" id="path-chain"></div>
+    </div>
+  </div>
+
+  <div class="path-panel" id="topic-panel" hidden>
+    <div class="path-panel-inner">
+      <button class="path-close" id="topic-close" type="button" aria-label="Close">×</button>
+      <h2 id="topic-name"></h2>
+      <div id="topic-body"></div>
+    </div>
+  </div>
+
+  <div class="path-panel" id="author-panel" hidden>
+    <div class="path-panel-inner">
+      <button class="path-close" id="author-close" type="button" aria-label="Close">×</button>
+      <h2 id="author-name"></h2>
+      <div id="author-body"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    Data: OpenAlex (CC0). Built on Relate by Neo4j.
+    <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> ·
+    <a href="https://relatedb.ai" target="_blank" rel="noopener">Relate</a>
+  </footer>
+
+  <script src="/static/vendor/cytoscape.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
