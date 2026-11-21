@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "papergraph": {
+      "command": "relate",
+      "args": ["serve", "--database", "data/papergraph.rl", "--mcp", "stdio", "--read-only"]
+    }
+  }
+}

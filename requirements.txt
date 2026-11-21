@@ -1,0 +1,4 @@
+relate-db==1.0.1
+fastapi==0.163.1
+uvicorn==0.54.0
+pydantic==2.14.3
